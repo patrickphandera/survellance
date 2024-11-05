@@ -2,6 +2,6 @@ flask
 numpy
 tensorflow
 opencv-python
-base64
+pybase64
 logging
 flask_socketio
