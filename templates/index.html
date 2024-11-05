@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time Video Stream with Classification</title>
+</head>
+<body>
+    <div>
+        <h1>Real-Time Classification</h1>
+        <img id="videoFrame" style="width: 500px; height: auto;" />
+        <p id="predictionText"></p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.min.js"></script>
+    <script>
+        const socket = io();
+
+        // Start the video classification stream
+        socket.emit('start_stream');
+
+        // Listen for classification results
+        socket.on('classification_result', (data) => {
+            // Update the displayed image
+            document.getElementById('videoFrame').src = 'data:image/jpeg;base64,' + data.image;
+
+            // Display the prediction text
+            document.getElementById('predictionText').innerText = 'Predicted Class: ' + data.prediction;
+        });
+    </script>
+</body>
+</html>
